@@ -48,7 +48,7 @@ textarea{min-height:80px;resize:vertical}
 .choices button{min-height:48px;padding:6px 14px;border-radius:12px;border:2px solid var(--line);background:#fff;cursor:pointer;font-weight:600}
 .choices button.on{background:var(--green-l);border-color:var(--green);color:#14532d}
 .choices button.on::before{content:"✔ "}
-.groups{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.groups{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .groups button{min-height:64px;font-size:1.1rem}
 .members{display:grid;grid-template-columns:110px 1fr;gap:8px;align-items:center}
 .members span{font-weight:700;color:var(--sub);font-size:.9rem}
@@ -91,7 +91,7 @@ ul.rules li{margin:.2em 0}
 @media (max-width:560px){
   .slots,.bonus{grid-template-columns:1fr}
   .slot{grid-template-columns:110px 1fr}
-  .groups{grid-template-columns:repeat(4,1fr)}
+  .groups{grid-template-columns:repeat(3,1fr)}
   .members{grid-template-columns:90px 1fr}
 }
 </style>
@@ -111,13 +111,13 @@ ul.rules li{margin:.2em 0}
 <!-- 0. 시작 -->
 <section class="screen" id="s0">
   <h2>모둠 정보 입력</h2>
-  <p class="muted">모둠 대표 1명의 휴대폰(또는 태블릿) 하나로 모둠 전체가 함께 활동해요. 각자 하는 활동은 <b>개인 미션</b> 파일로 자기 휴대폰에서 따로 해요.</p>
+  <p class="muted"><b>기록 담당</b>의 휴대폰(또는 태블릿) 하나로 모둠 전체가 함께 활동해요. 모둠장이 아니어도 괜찮아요. 탐방 시간(14:00~15:30)에는 <b>모둠 미션에 집중</b>해요. 개인 미션은 현장에서 사진 1장만 찍고, 나머지는 돌아오는 버스에서 해요.</p>
   <div class="card story">
     <b>🤝 역할을 나눠요</b> <span class="muted">(식물마다 돌아가며 바꿔도 좋아요)</span>
     <ul class="rules">
       <li>📷 <b>사진 담당</b>: 식물 사진을 찍어요.</li>
       <li>🔍 <b>이름 탐정</b>: 안내판이나 렌즈 검색으로 이름을 찾아요.</li>
-      <li>✍️ <b>기록 담당</b>: 모둠원이 말한 특징을 받아 적어요.</li>
+      <li>✍️ <b>기록 담당</b>: 모둠 미션 휴대폰을 들고, 모둠원이 말한 특징을 받아 적어요. 결과 카드도 올려요.</li>
       <li>⏰ <b>시간·안전 지킴이</b>: 집합 시각과 안전 규칙을 챙겨요.</li>
     </ul>
   </div>
@@ -126,9 +126,7 @@ ul.rules li{margin:.2em 0}
     <div class="choices groups" data-choice="group">
       <button type="button" data-val="1">1모둠</button><button type="button" data-val="2">2모둠</button>
       <button type="button" data-val="3">3모둠</button><button type="button" data-val="4">4모둠</button>
-      <button type="button" data-val="5">5모둠</button><button type="button" data-val="6">6모둠</button>
-      <button type="button" data-val="7">7모둠</button><button type="button" data-val="8">8모둠</button>
-    </div>
+      <button type="button" data-val="5">5모둠</button><button type="button" data-val="6">6모둠</button>    </div>
     <label class="f">모둠원 학번과 이름 <span class="muted">(4명이면 마지막 칸은 비워 두세요)</span></label>
     <div class="members" id="members"></div>
   </div>
