@@ -48,7 +48,7 @@ textarea{min-height:80px;resize:vertical}
 .choices button{min-height:48px;padding:6px 14px;border-radius:12px;border:2px solid var(--line);background:#fff;cursor:pointer;font-weight:600}
 .choices button.on{background:var(--green-l);border-color:var(--green);color:#14532d}
 .choices button.on::before{content:"✔ "}
-.groups{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.groups{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .groups button{min-height:64px;font-size:1.1rem}
 .members{display:grid;grid-template-columns:110px 1fr;gap:8px;align-items:center}
 .members span{font-weight:700;color:var(--sub);font-size:.9rem}
@@ -91,7 +91,7 @@ ul.rules li{margin:.2em 0}
 @media (max-width:560px){
   .slots,.bonus{grid-template-columns:1fr}
   .slot{grid-template-columns:110px 1fr}
-  .groups{grid-template-columns:repeat(3,1fr)}
+  .groups{grid-template-columns:repeat(4,1fr)}
   .members{grid-template-columns:90px 1fr}
 }
 </style>
@@ -126,8 +126,10 @@ ul.rules li{margin:.2em 0}
     <div class="choices groups" data-choice="group">
       <button type="button" data-val="1">1모둠</button><button type="button" data-val="2">2모둠</button>
       <button type="button" data-val="3">3모둠</button><button type="button" data-val="4">4모둠</button>
-      <button type="button" data-val="5">5모둠</button><button type="button" data-val="6">6모둠</button>    </div>
-    <label class="f">모둠원 학번과 이름 <span class="muted">(4명이면 마지막 칸은 비워 두세요)</span></label>
+      <button type="button" data-val="5">5모둠</button><button type="button" data-val="6">6모둠</button>
+      <button type="button" data-val="7">7모둠</button>
+    </div>
+    <label class="f">모둠원 학번과 이름 <span class="muted">(최대 6명, 남는 칸은 비워 두세요)</span></label>
     <div class="members" id="members"></div>
   </div>
   <div class="card">
@@ -230,6 +232,7 @@ ul.rules li{margin:.2em 0}
 'use strict';
 var KEY='taehwa_group_mission_v1';
 var N=6; // 찾을 식물 수
+var MAXM=6; // 모둠원 최대 인원
 var BONUS=[
   {ic:'✋',t:'내 손바닥보다 큰 잎 찾기',ph:'어떤 식물의 잎이었나요?'},
   {ic:'🌰',t:'열매나 씨앗 찾기',ph:'어떤 모양, 어떤 색이었나요?'},
@@ -243,7 +246,7 @@ var SCREENS=['시작','미션 안내','① 식물 찾기','② 보너스','③ �
 function blank(){
   var p=[],i;for(i=0;i<N;i++)p.push({photo:'',place:'',name:'',nick:'',note:''});
   var b=[];for(i=0;i<BONUS.length;i++)b.push({photo:'',note:''});
-  var m=[];for(i=0;i<5;i++)m.push({id:'',name:''});
+  var m=[];for(i=0;i<MAXM;i++)m.push({id:'',name:''});
   return {screen:0,group:'',members:m,meet:'',plants:p,bonus:b,groupPhoto:'',best:'',bestWhy:''};
 }
 function merge(d,s){
@@ -336,7 +339,7 @@ function screenDone(i){
 
 /* ---------- 화면 그리기 ---------- */
 function buildMembers(){
-  var h='';for(var i=0;i<5;i++)h+='<input type="text" inputmode="numeric" data-bind="members.'+i+'.id" placeholder="학번" aria-label="'+(i+1)+'번째 학번"><input type="text" data-bind="members.'+i+'.name" placeholder="'+(i===0?'이름 (모둠장)':'이름')+'" aria-label="'+(i+1)+'번째 이름">';
+  var h='';for(var i=0;i<MAXM;i++)h+='<input type="text" inputmode="numeric" data-bind="members.'+i+'.id" placeholder="학번" aria-label="'+(i+1)+'번째 학번"><input type="text" data-bind="members.'+i+'.name" placeholder="'+(i===0?'이름 (모둠장)':'이름')+'" aria-label="'+(i+1)+'번째 이름">';
   $('members').innerHTML=h;
 }
 function buildZones(){
